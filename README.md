@@ -19,10 +19,10 @@ interface IVaultsV1Factory {
   event OwnerChanged(address indexed oldOwner, address indexed newOwner);
   event VaultCreated(string indexed name);
 
-	function owner() external view returns (address);
+  function owner() external view returns (address);
   function setOwner(address _owner) external;
 
-	function getVault(string name) external view returns (address vault);
+  function getVault(string name) external view returns (address vault);
   function createVault(string name) external returns (address vault);
 }
 ```
@@ -36,12 +36,18 @@ pragma solidity >= 0.5.0;
 
 interface IVaultsV1Vault {
   event OwnerChanged(address indexed oldOwner, address indexed newOwner);
-	event Swap(address integration, int256 amount0, int26 amount1, uint160 price);
+  event Swap(address integration, int256 amount0, int26 amount1, uint160 price);
 
-	function owner() external view returns (address);
+  function owner() external view returns (address);
   function setOwner(address _owner) external;
 
-	function swap(address integration, address token0, address token1, int256 amount, uint160 price) external returns (int256 amount0, int256 amount1);
+  function swap(
+    address integration,
+    address token0,
+    address token1,
+    int256 amount,
+    uint160 price
+  ) external returns (int256 amount0, int256 amount1);
 }
 ```
 
@@ -54,16 +60,22 @@ pragma solidity >= 0.5.0;
 
 interface IVaultsV1Guard {
   event OwnerChanged(address indexed oldOwner, address indexed newOwner);
-	event IntegrationAdded(address indexed intergration);
-	event IntegrationRemoved(address indexed intergration);
+  event IntegrationAdded(address indexed intergration);
+  event IntegrationRemoved(address indexed intergration);
 
-	function owner() external view returns (address);
+  function owner() external view returns (address);
   function setOwner(address _owner) external;
 
-	function addIntegration(address integration);
-	function removeIntegration(address integration);
+  function addIntegration(address integration);
+  function removeIntegration(address integration);
 
-  function swap(address integration, address token0, address token1, int256 amount, uint160 price) external returns (int256 amount0, int256 amount1);
+  function swap(
+    address integration,
+    address token0,
+    address token1,
+    int256 amount,
+    uint160 price
+  ) external returns (int256 amount0, int256 amount1);
 }
 ```
 
@@ -77,9 +89,14 @@ pragma solidity >= 0.5.0;
 interface IVaultsV1Integration {
   event OwnerChanged(address indexed oldOwner, address indexed newOwner);
 
-	function owner() external view returns (address);
+  function owner() external view returns (address);
   function setOwner(address _owner) external;
 
-  function swap(address token0, address token1, int256 amount, uint160 price) external returns (int256 amount0, int256 amount1);
+  function swap(
+    address token0,
+    address token1,
+    int256 amount,
+    uint160 price
+  ) external returns (int256 amount0, int256 amount1);
 }
 ```
